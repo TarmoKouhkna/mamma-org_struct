@@ -128,13 +128,6 @@
 
   .vline { width: 1.5px; height: 20px; background: var(--border); }
 
-  .top-card.dev {
-    background: var(--red-soft); border: 1.5px solid rgba(212,43,43,0.2);
-    animation-delay: 0.1s;
-  }
-  .top-card.dev .tc-role { font-weight: 600; font-size: 14px; color: var(--red); }
-  .top-card.dev .tc-name { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
-  .top-note { font-size: 11px; color: var(--ink-4); margin-top: 4px; margin-bottom: 2px; }
   .arr-label { font-size: 12px; color: var(--ink-4); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 4px; }
 
   /* ── DEPARTMENTS ── */
@@ -242,6 +235,7 @@
   .print-fab svg { width: 20px; height: 20px; }
 
   /* ── COLORS ── */
+  .c-dev .dh-dot { background: #F97316; }
   .c-fin .dh-dot, .c-fin .r-pip { background: #3B82F6; }
   .c-qua .dh-dot, .c-qua .r-pip { background: #10B981; }
   .c-sal .dh-dot, .c-sal .r-pip { background: #F59E0B; }
@@ -301,16 +295,21 @@
       <div class="tc-name">Aivo Varem</div>
     </div>
     <div class="vline"></div>
-    <div class="top-card dev">
-      <div class="tc-role">Arendusjuht</div>
-      <div class="tc-name">Liis Anette Pae</div>
-    </div>
-    <div class="top-note">Allub otse tegevjuhile · koordineerib LEAN-tegevusi</div>
-    <div class="vline"></div>
-    <div class="arr-label">6 osakonda</div>
+    <div class="arr-label">Osakondade juhid ja arendusjuht</div>
   </div>
 
   <div class="grid">
+
+    <!-- ARENDUSJUHT -->
+    <div class="dept c-dev">
+      <div class="dh" style="cursor:default;">
+        <div class="dh-dot"></div>
+        <div class="dh-text">
+          <div class="dh-title">Arendusjuht</div>
+          <div class="dh-sub">Liis Anette Pae · allub otse tegevjuhile · LEAN koordinaator</div>
+        </div>
+      </div>
+    </div>
 
     <!-- FINANTS -->
     <div class="dept c-fin">
@@ -424,7 +423,7 @@
         <div class="r r-i2" data-s="raivo vahtre mehaanik"><div class="r-pip"></div><div class="r-body"><div class="r-title">Mehaanik</div><div class="r-name">Raivo Vahtre</div></div></div>
         <div class="r r-i2" data-s="vladimir botvinko mehaanik"><div class="r-pip"></div><div class="r-body"><div class="r-title">Mehaanik</div><div class="r-name">Vladimir Botvinko</div></div></div>
         <div class="r r-i2" data-s="kris soitu mehaanik"><div class="r-pip"></div><div class="r-body"><div class="r-title">Mehaanik</div><div class="r-name">Kris Soitu</div></div></div>
-        <div class="r r-i2" data-s="territooriumi hooldaja"><div class="r-pip"></div><div class="r-body"><div class="r-title">Territooriumi hooldaja</div></div></div>
+        <div class="r r-i2" data-s="valdo kukk territooriumi hooldaja"><div class="r-pip"></div><div class="r-body"><div class="r-title">Territooriumi hooldaja</div><div class="r-name">Valdo Kukk</div></div></div>
       </div></div>
     </div>
 
