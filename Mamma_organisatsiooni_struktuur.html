@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mamma – Organisatsiooni struktuur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #D42B2B;
+    --red-soft: #F9EDED;
+    --red-glow: rgba(212, 43, 43, 0.08);
+    --ink: #141218;
+    --ink-2: #3A3640;
+    --ink-3: #6E6A76;
+    --ink-4: #9D99A6;
+    --surface: #F7F6F9;
+    --card: #FFFFFF;
+    --border: #ECEAF0;
+    --border-hover: #D8D5DE;
+    --radius: 14px;
+    --radius-sm: 10px;
+    --shadow-sm: 0 1px 2px rgba(20,18,24,0.04);
+    --shadow-md: 0 2px 8px rgba(20,18,24,0.05), 0 8px 24px rgba(20,18,24,0.04);
+    --shadow-lg: 0 4px 12px rgba(20,18,24,0.06), 0 16px 40px rgba(20,18,24,0.06);
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--ink);
+    padding: 28px 32px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -60%; right: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(212,43,43,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative; z-index: 1;
+    display: flex; align-items: center; gap: 18px;
+  }
+  .header-badge {
+    width: 46px; height: 46px;
+    background: var(--red);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 20px; color: white;
+    flex-shrink: 0;
+    box-shadow: 0 0 24px rgba(212,43,43,0.4);
+  }
+  .header h1 {
+    font-size: 20px; font-weight: 700; color: white; letter-spacing: -0.3px;
+  }
+  .header .subtitle {
+    font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.5); margin-top: 2px;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 24px 100px;
+  }
+
+  /* ── TOOLBAR ── */
+  .toolbar {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    margin-bottom: 24px;
+  }
+  .tb {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 8px; cursor: pointer;
+    font-family: inherit; font-size: 12px; font-weight: 600; color: var(--ink-2);
+    transition: var(--transition); letter-spacing: 0.1px;
+  }
+  .tb:hover { border-color: var(--border-hover); background: var(--surface); }
+  .tb:active { transform: scale(0.97); }
+
+  .search {
+    flex: 1; min-width: 180px; max-width: 340px;
+    padding: 8px 14px 8px 36px; border: 1px solid var(--border); border-radius: 8px;
+    font-family: inherit; font-size: 13px; font-weight: 400; color: var(--ink);
+    background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%239D99A6' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='7' cy='7' r='4.5'/%3E%3Cline x1='10.2' y1='10.2' x2='13.5' y2='13.5'/%3E%3C/svg%3E") 12px center no-repeat;
+    outline: none; transition: var(--transition);
+  }
+  .search:focus { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-glow); }
+  .search::placeholder { color: var(--ink-4); }
+
+  /* ── TOP HIERARCHY ── */
+  .top-cards {
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 28px; gap: 0;
+  }
+  .top-card {
+    padding: 14px 32px;
+    border-radius: var(--radius);
+    text-align: center;
+    animation: fadeUp 0.5s ease both;
+  }
+  .top-card.ceo {
+    background: var(--red);
+    color: white;
+    box-shadow: 0 6px 24px rgba(212,43,43,0.25);
+  }
+  .top-card.ceo .tc-role { font-weight: 700; font-size: 16px; letter-spacing: -0.2px; }
+  .top-card.ceo .tc-name { font-weight: 400; font-size: 13px; opacity: 0.8; margin-top: 2px; }
+
+  .vline { width: 1.5px; height: 20px; background: var(--border); }
+
+  .top-card.dev {
+    background: var(--red-soft); border: 1.5px solid rgba(212,43,43,0.2);
+    animation-delay: 0.1s;
+  }
+  .top-card.dev .tc-role { font-weight: 600; font-size: 14px; color: var(--red); }
+  .top-card.dev .tc-name { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+  .top-note { font-size: 11px; color: var(--ink-4); margin-top: 4px; margin-bottom: 2px; }
+  .arr-label { font-size: 12px; color: var(--ink-4); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 4px; }
+
+  /* ── DEPARTMENTS ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 14px;
+  }
+
+  .dept {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow var(--transition), border-color var(--transition);
+    animation: fadeUp 0.4s ease both;
+  }
+  .dept:nth-child(1) { animation-delay: 0.05s; }
+  .dept:nth-child(2) { animation-delay: 0.1s; }
+  .dept:nth-child(3) { animation-delay: 0.15s; }
+  .dept:nth-child(4) { animation-delay: 0.2s; }
+  .dept:nth-child(5) { animation-delay: 0.25s; }
+  .dept:nth-child(6) { animation-delay: 0.3s; }
+  .dept:hover { box-shadow: var(--shadow-md); }
+  .dept.hl { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-glow), var(--shadow-md); }
+
+  .dh {
+    display: flex; align-items: center; padding: 14px 16px;
+    cursor: pointer; user-select: none; gap: 12px;
+    transition: background var(--transition);
+  }
+  .dh:hover { background: var(--surface); }
+
+  .dh-dot {
+    width: 10px; height: 10px; border-radius: 4px; flex-shrink: 0;
+    transition: transform var(--transition);
+  }
+  .dept.open .dh-dot { transform: scale(1.2); }
+
+  .dh-text { flex: 1; }
+  .dh-title { font-weight: 700; font-size: 14px; letter-spacing: -0.15px; }
+  .dh-sub { font-size: 12px; color: var(--ink-3); margin-top: 1px; font-weight: 400; }
+
+  .dh-chevron {
+    width: 20px; height: 20px; flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--ink-4);
+  }
+  .dept.open .dh-chevron { transform: rotate(180deg); }
+
+  .db { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .dept.open .db { max-height: 1400px; }
+
+  .dc { padding: 2px 16px 16px; }
+  .dc-divider { height: 1px; background: var(--border); margin-bottom: 10px; }
+
+  /* ── ROLES ── */
+  .r {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 8px; margin: 2px 0;
+    border-radius: 8px;
+    transition: background var(--transition);
+  }
+  .r:hover { background: var(--surface); }
+  .r.match { background: #FFF8E1; }
+
+  .r-i1 { padding-left: 24px; }
+  .r-i2 { padding-left: 46px; }
+  .r-i3 { padding-left: 68px; }
+
+  .r-pip {
+    width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  .r-body { flex: 1; min-width: 0; }
+  .r-title { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .r-name { font-size: 12px; color: var(--ink-3); font-weight: 400; margin-top: 0px; }
+  .r-count { font-weight: 400; color: var(--ink-4); }
+  .r-note { font-size: 11px; color: var(--ink-4); font-style: italic; }
+
+  .r-service .r-title { color: var(--ink-4); }
+  .r-service .r-pip { opacity: 0.25; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 28px; padding: 16px 18px;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    font-size: 12px; color: var(--ink-3); line-height: 1.8;
+  }
+  .footer strong { color: var(--ink-2); font-weight: 600; }
+
+  /* ── PRINT BTN ── */
+  .print-fab {
+    position: fixed; bottom: 24px; right: 24px;
+    width: 48px; height: 48px; border-radius: 14px;
+    background: var(--ink); color: white; border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: var(--shadow-lg);
+    transition: transform var(--transition), background var(--transition);
+    z-index: 10;
+  }
+  .print-fab:hover { background: var(--red); transform: scale(1.06); }
+  .print-fab svg { width: 20px; height: 20px; }
+
+  /* ── COLORS ── */
+  .c-fin .dh-dot, .c-fin .r-pip { background: #3B82F6; }
+  .c-qua .dh-dot, .c-qua .r-pip { background: #10B981; }
+  .c-sal .dh-dot, .c-sal .r-pip { background: #F59E0B; }
+  .c-hr  .dh-dot, .c-hr  .r-pip { background: #8B5CF6; }
+  .c-pro .dh-dot, .c-pro .r-pip { background: var(--red); }
+  .c-mkt .dh-dot, .c-mkt .r-pip { background: #EC4899; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media print {
+    .print-fab, .toolbar { display: none !important; }
+    .db { max-height: none !important; }
+    .dept { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+    .header { background: white; color: var(--ink); }
+    .header h1 { color: var(--ink); }
+    .header .subtitle { color: var(--ink-3); }
+    .header::after { display: none; }
+    body { background: white; }
+    .main { padding: 12px; }
+  }
+
+  @media (max-width: 700px) {
+    .grid { grid-template-columns: 1fr; }
+    .main { padding: 16px 14px 100px; }
+    .header { padding: 20px 16px; }
+    .search { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">M</div>
+    <div>
+      <h1>Organisatsiooni struktuur</h1>
+      <div class="subtitle">Saarioinen Eesti OÜ · Mamma · Rapla · 122 töötajat · 03/2026</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="toolbar">
+    <button class="tb" onclick="toggleAll(true)">↓ Ava kõik</button>
+    <button class="tb" onclick="toggleAll(false)">↑ Sulge kõik</button>
+    <input type="text" class="search" placeholder="Otsi nime või ametit…" oninput="doSearch(this.value)">
+  </div>
+
+  <div class="top-cards">
+    <div class="top-card ceo">
+      <div class="tc-role">Tegevjuht</div>
+      <div class="tc-name">Aivo Varem</div>
+    </div>
+    <div class="vline"></div>
+    <div class="top-card dev">
+      <div class="tc-role">Arendusjuht</div>
+      <div class="tc-name">Liis Anette Pae</div>
+    </div>
+    <div class="top-note">Allub otse tegevjuhile · koordineerib LEAN-tegevusi</div>
+    <div class="vline"></div>
+    <div class="arr-label">6 osakonda</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- FINANTS -->
+    <div class="dept c-fin">
+      <div class="dh" onclick="this.parentElement.classList.toggle('open')">
+        <div class="dh-dot"></div>
+        <div class="dh-text">
+          <div class="dh-title">Finantsosakond</div>
+          <div class="dh-sub">Raid Ruut · Finantsjuht</div>
+        </div>
+        <svg class="dh-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8l4 4 4-4"/></svg>
+      </div>
+      <div class="db"><div class="dc"><div class="dc-divider"></div>
+        <div class="r" data-s="raid ruut finantsjuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Finantsjuht</div><div class="r-name">Raid Ruut</div></div></div>
+        <div class="r r-i1" data-s="karin jõggis pearaamatupidaja"><div class="r-pip"></div><div class="r-body"><div class="r-title">Pearaamatupidaja</div><div class="r-name">Karin Jõggis</div></div></div>
+        <div class="r r-i2" data-s="marge uueni raamatupidaja"><div class="r-pip"></div><div class="r-body"><div class="r-title">Raamatupidaja</div><div class="r-name">Marge Uueni</div></div></div>
+        <div class="r r-i1" data-s="merike taza ärikontroller nav tugi"><div class="r-pip"></div><div class="r-body"><div class="r-title">Ärikontroller / NAV-tugi</div><div class="r-name">Merike Taza</div></div></div>
+        <div class="r r-i1 r-service" data-s="arne koemets it-spetsialist"><div class="r-pip"></div><div class="r-body"><div class="r-title">IT-spetsialist <span class="r-note">(teenusena)</span></div><div class="r-name">Arne Koemets</div></div></div>
+      </div></div>
+    </div>
+
+    <!-- KVALITEET -->
+    <div class="dept c-qua">
+      <div class="dh" onclick="this.parentElement.classList.toggle('open')">
+        <div class="dh-dot"></div>
+        <div class="dh-text">
+          <div class="dh-title">Kvaliteediosakond</div>
+          <div class="dh-sub">Anu Oad · Kvaliteedijuht</div>
+        </div>
+        <svg class="dh-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8l4 4 4-4"/></svg>
+      </div>
+      <div class="db"><div class="dc"><div class="dc-divider"></div>
+        <div class="r" data-s="anu oad kvaliteedijuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Kvaliteedijuht</div><div class="r-name">Anu Oad</div></div></div>
+        <div class="r r-i1" data-s="pille tulp kvaliteedispetsialist"><div class="r-pip"></div><div class="r-body"><div class="r-title">Kvaliteedispetsialist</div><div class="r-name">Pille Tulp</div></div></div>
+        <div class="r r-i1" data-s="arolyn roog kvaliteedispetsialist"><div class="r-pip"></div><div class="r-body"><div class="r-title">Kvaliteedispetsialist</div><div class="r-name">Arolyn Roog</div></div></div>
+      </div></div>
+    </div>
+
+    <!-- MÜÜK -->
+    <div class="dept c-sal">
+      <div class="dh" onclick="this.parentElement.classList.toggle('open')">
+        <div class="dh-dot"></div>
+        <div class="dh-text">
+          <div class="dh-title">Müügiosakond</div>
+          <div class="dh-sub">Marika Maidla · Müügijuht</div>
+        </div>
+        <svg class="dh-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8l4 4 4-4"/></svg>
+      </div>
+      <div class="db"><div class="dc"><div class="dc-divider"></div>
+        <div class="r" data-s="marika maidla müügijuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Müügijuht</div><div class="r-name">Marika Maidla</div></div></div>
+        <div class="r r-i1" data-s="jane sibul suurkliendi müügijuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Suurkliendi müügijuht</div><div class="r-name">Jane Sibul</div></div></div>
+        <div class="r r-i1" data-s="herdis keldrema suurkliendi müügijuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Suurkliendi müügijuht</div><div class="r-name">Herdis Keldrema</div></div></div>
+        <div class="r r-i2" data-s="merle vilbas müügiassistent"><div class="r-pip"></div><div class="r-body"><div class="r-title">Müügiassistent</div><div class="r-name">Merle Vilbas</div></div></div>
+        <div class="r r-i2" data-s="merike muldmaa müügiassistent"><div class="r-pip"></div><div class="r-body"><div class="r-title">Müügiassistent</div><div class="r-name">Merike Muldmaa</div></div></div>
+        <div class="r r-i1" data-s="annika kõiv ekspordi müügijuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Ekspordi müügijuht</div><div class="r-name">Annika Kõiv</div></div></div>
+        <div class="r r-i1" data-s="anne kasemets tootmisplaneerija planeerija"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootmisplaneerija</div><div class="r-name">Anne Kasemets</div></div></div>
+        <div class="r r-i1" data-s="heidi tamm ostujuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Ostujuht</div><div class="r-name">Heidi Tamm</div></div></div>
+        <div class="r r-i2" data-s="käthe tammik ostuspetsialist"><div class="r-pip"></div><div class="r-body"><div class="r-title">Ostuspetsialist</div><div class="r-name">Käthe Tammik</div></div></div>
+        <div class="r r-i1" data-s="margo asten ladude juht laojuhataja"><div class="r-pip"></div><div class="r-body"><div class="r-title">Ladude juht</div><div class="r-name">Margo Asten</div></div></div>
+        <div class="r r-i2" data-s="priit viher vtl laohoidja valmistoodangu ladu"><div class="r-pip"></div><div class="r-body"><div class="r-title">VTL laohoidja</div><div class="r-name">Priit Viher</div></div></div>
+        <div class="r r-i3" data-s="matis kilomets vanemkomplekteerija"><div class="r-pip"></div><div class="r-body"><div class="r-title">Vanemkomplekteerija</div><div class="r-name">Matis Kilomets</div></div></div>
+        <div class="r r-i2" data-s="rauno kaljend tal laohoidja tooraineladu"><div class="r-pip"></div><div class="r-body"><div class="r-title">TAL laohoidja</div><div class="r-name">Rauno Kaljend</div></div></div>
+        <div class="r r-i2" data-s="urmas koppel toorainelao vahetuse vanem"><div class="r-pip"></div><div class="r-body"><div class="r-title">Toorainelao vahetuse vanem</div><div class="r-name">Urmas Koppel</div></div></div>
+        <div class="r r-i3" data-s="komplekteerija transporditöötaja"><div class="r-pip"></div><div class="r-body"><div class="r-title">Komplekteerija / transporditöötaja <span class="r-count">(8)</span></div></div></div>
+        <div class="r r-i3" data-s="laotööline kastipesu"><div class="r-pip"></div><div class="r-body"><div class="r-title">Laotööline <span class="r-note">(kastipesu ja abitööd)</span></div></div></div>
+      </div></div>
+    </div>
+
+    <!-- PERSONAL -->
+    <div class="dept c-hr">
+      <div class="dh" onclick="this.parentElement.classList.toggle('open')">
+        <div class="dh-dot"></div>
+        <div class="dh-text">
+          <div class="dh-title">Personali- ja üldhaldusosakond</div>
+          <div class="dh-sub">Personalijuht</div>
+        </div>
+        <svg class="dh-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8l4 4 4-4"/></svg>
+      </div>
+      <div class="db"><div class="dc"><div class="dc-divider"></div>
+        <div class="r" data-s="personalijuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Personalijuht</div></div></div>
+        <div class="r r-i1" data-s="tarmo kõuhkna töökeskkonna spetsialist"><div class="r-pip"></div><div class="r-body"><div class="r-title">Töökeskkonna spetsialist</div><div class="r-name">Tarmo Kõuhkna</div></div></div>
+        <div class="r r-i1" data-s="katre kaha personalispetsialist"><div class="r-pip"></div><div class="r-body"><div class="r-title">Personalispetsialist</div><div class="r-name">Katre Kaha</div></div></div>
+        <div class="r r-i1" data-s="maiu ellermaa haldusspetsialist"><div class="r-pip"></div><div class="r-body"><div class="r-title">Haldusspetsialist</div><div class="r-name">Maiu Ellermaa</div></div></div>
+        <div class="r r-i2" data-s="kokk söökla"><div class="r-pip"></div><div class="r-body"><div class="r-title">Kokk <span class="r-count">(2)</span></div></div></div>
+        <div class="r r-i2" data-s="puhastusteenindaja"><div class="r-pip"></div><div class="r-body"><div class="r-title">Puhastusteenindaja <span class="r-count">(3)</span></div></div></div>
+      </div></div>
+    </div>
+
+    <!-- TOOTMINE -->
+    <div class="dept c-pro">
+      <div class="dh" onclick="this.parentElement.classList.toggle('open')">
+        <div class="dh-dot"></div>
+        <div class="dh-text">
+          <div class="dh-title">Tootmisosakond</div>
+          <div class="dh-sub">Kaido Elias · Tootmisjuht</div>
+        </div>
+        <svg class="dh-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8l4 4 4-4"/></svg>
+      </div>
+      <div class="db"><div class="dc"><div class="dc-divider"></div>
+        <div class="r" data-s="kaido elias tootmisjuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootmisjuht</div><div class="r-name">Kaido Elias</div></div></div>
+        <div class="r r-i1" data-s="priit kõrgmaa tootmise tehnoloog"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootmise tehnoloog</div><div class="r-name">Priit Kõrgmaa</div></div></div>
+        <div class="r r-i1" data-s="ingrit ruddi tootmiskoordinaator"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootmiskoordinaator</div><div class="r-name">Ingrit Ruddi</div></div></div>
+        <div class="r r-i2" data-s="airi loorents pannkook vahetuse vanem"><div class="r-pip"></div><div class="r-body"><div class="r-title">Vahetuse vanem – Pannkook</div><div class="r-name">Airi Loorents</div></div></div>
+        <div class="r r-i2" data-s="eda erg soe toit vahetuse vanem"><div class="r-pip"></div><div class="r-body"><div class="r-title">Vahetuse vanem – Soe toit</div><div class="r-name">Eda Erg</div></div></div>
+        <div class="r r-i2" data-s="maili oberg salat vahetuse vanem"><div class="r-pip"></div><div class="r-body"><div class="r-title">Vahetuse vanem – Salat</div><div class="r-name">Maili Oberg</div></div></div>
+        <div class="r r-i2" data-s="kert svenov võileib vahetuse vanem"><div class="r-pip"></div><div class="r-body"><div class="r-title">Vahetuse vanem – Võileib</div><div class="r-name">Kert Svenov</div></div></div>
+        <div class="r r-i3" data-s="tootmistöötajad"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootmistöötajad</div></div></div>
+        <div style="height:8px;"></div>
+        <div class="r r-i1" data-s="ago lõhmus hooldusjuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Hooldusjuht</div><div class="r-name">Ago Lõhmus</div></div></div>
+        <div class="r r-i2" data-s="andrus remmelg hooldusspetsialist"><div class="r-pip"></div><div class="r-body"><div class="r-title">Hooldusspetsialist</div><div class="r-name">Andrus Remmelg</div></div></div>
+        <div class="r r-i2" data-s="tiit lõhmus mehaanik"><div class="r-pip"></div><div class="r-body"><div class="r-title">Mehaanik</div><div class="r-name">Tiit Lõhmus</div></div></div>
+        <div class="r r-i2" data-s="raivo vahtre mehaanik"><div class="r-pip"></div><div class="r-body"><div class="r-title">Mehaanik</div><div class="r-name">Raivo Vahtre</div></div></div>
+        <div class="r r-i2" data-s="vladimir botvinko mehaanik"><div class="r-pip"></div><div class="r-body"><div class="r-title">Mehaanik</div><div class="r-name">Vladimir Botvinko</div></div></div>
+        <div class="r r-i2" data-s="kris soitu mehaanik"><div class="r-pip"></div><div class="r-body"><div class="r-title">Mehaanik</div><div class="r-name">Kris Soitu</div></div></div>
+        <div class="r r-i2" data-s="territooriumi hooldaja"><div class="r-pip"></div><div class="r-body"><div class="r-title">Territooriumi hooldaja</div></div></div>
+      </div></div>
+    </div>
+
+    <!-- TURUNDUS -->
+    <div class="dept c-mkt">
+      <div class="dh" onclick="this.parentElement.classList.toggle('open')">
+        <div class="dh-dot"></div>
+        <div class="dh-text">
+          <div class="dh-title">Turundus- ja tootearendusosakond</div>
+          <div class="dh-sub">Triin Lõoke · Turundus- ja tootearendusjuht</div>
+        </div>
+        <svg class="dh-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8l4 4 4-4"/></svg>
+      </div>
+      <div class="db"><div class="dc"><div class="dc-divider"></div>
+        <div class="r" data-s="triin lõoke turundus tootearendusjuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Turundus- ja tootearendusjuht</div><div class="r-name">Triin Lõoke</div></div></div>
+        <div class="r r-i1" data-s="tiina mürk tootejuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootejuht</div><div class="r-name">Tiina Mürk</div></div></div>
+        <div class="r r-i1" data-s="merit mägi tootejuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootejuht</div><div class="r-name">Merit Mägi</div></div></div>
+        <div class="r r-i1" data-s="anneli loodus tootearendustehnoloog"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootearendustehnoloog</div><div class="r-name">Anneli Loodus</div></div></div>
+      </div></div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <strong>Töökeskkonna kontaktid</strong><br>
+    Töökeskonnaspetsialist: Tarmo Kõuhkna<br>
+    Töökeskkonnavolinikud: Margo Asten, Katre Kaha, Maie Laanemets, Silvi Orgusaar, Dagmar Puuorg
+  </div>
+
+</div>
+
+<button class="print-fab" onclick="window.print()" title="Prindi">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+</button>
+
+<script>
+function toggleAll(open) {
+  document.querySelectorAll('.dept').forEach(d => {
+    if (open) d.classList.add('open');
+    else d.classList.remove('open');
+  });
+}
+
+function doSearch(val) {
+  const q = val.toLowerCase().trim();
+  document.querySelectorAll('.r').forEach(r => r.classList.remove('match'));
+  document.querySelectorAll('.dept').forEach(d => d.classList.remove('hl'));
+  if (!q || q.length < 2) return;
+  document.querySelectorAll('.r').forEach(r => {
+    const data = (r.getAttribute('data-s') || '') + ' ' + r.textContent;
+    if (data.toLowerCase().includes(q)) {
+      r.classList.add('match');
+      const dept = r.closest('.dept');
+      if (dept) { dept.classList.add('open', 'hl'); }
+    }
+  });
+}
+</script>
+
+</body>
+</html>
