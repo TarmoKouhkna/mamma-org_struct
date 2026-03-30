@@ -69,10 +69,10 @@
     box-shadow: 0 0 24px rgba(212,43,43,0.4);
   }
   .header h1 {
-    font-size: 20px; font-weight: 700; color: white; letter-spacing: -0.3px;
+    font-size: 23px; font-weight: 700; color: white; letter-spacing: -0.3px;
   }
   .header .subtitle {
-    font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.5); margin-top: 2px;
+    font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.5); margin-top: 2px;
     letter-spacing: 0.2px;
   }
 
@@ -91,7 +91,7 @@
   .tb {
     background: var(--card); border: 1px solid var(--border);
     padding: 8px 16px; border-radius: 8px; cursor: pointer;
-    font-family: inherit; font-size: 12px; font-weight: 600; color: var(--ink-2);
+    font-family: inherit; font-size: 13px; font-weight: 600; color: var(--ink-2);
     transition: var(--transition); letter-spacing: 0.1px;
   }
   .tb:hover { border-color: var(--border-hover); background: var(--surface); }
@@ -99,8 +99,8 @@
 
   .search {
     flex: 1; min-width: 180px; max-width: 340px;
-    padding: 8px 14px 8px 36px; border: 1px solid var(--border); border-radius: 8px;
-    font-family: inherit; font-size: 13px; font-weight: 400; color: var(--ink);
+    padding: 9px 14px 9px 36px; border: 1px solid var(--border); border-radius: 8px;
+    font-family: inherit; font-size: 14px; font-weight: 400; color: var(--ink);
     background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%239D99A6' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='7' cy='7' r='4.5'/%3E%3Cline x1='10.2' y1='10.2' x2='13.5' y2='13.5'/%3E%3C/svg%3E") 12px center no-repeat;
     outline: none; transition: var(--transition);
   }
@@ -123,12 +123,12 @@
     color: white;
     box-shadow: 0 6px 24px rgba(212,43,43,0.25);
   }
-  .top-card.ceo .tc-role { font-weight: 700; font-size: 16px; letter-spacing: -0.2px; }
-  .top-card.ceo .tc-name { font-weight: 400; font-size: 13px; opacity: 0.8; margin-top: 2px; }
+  .top-card.ceo .tc-role { font-weight: 700; font-size: 18px; letter-spacing: -0.2px; }
+  .top-card.ceo .tc-name { font-weight: 400; font-size: 14px; opacity: 0.8; margin-top: 2px; }
 
   .vline { width: 1.5px; height: 20px; background: var(--border); }
 
-  .arr-label { font-size: 12px; color: var(--ink-4); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 4px; }
+  .arr-label { font-size: 13px; color: var(--ink-4); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 4px; }
 
   /* ── DEPARTMENTS ── */
   .grid {
@@ -169,8 +169,8 @@
   .dept.open .dh-dot { transform: scale(1.2); }
 
   .dh-text { flex: 1; }
-  .dh-title { font-weight: 700; font-size: 14px; letter-spacing: -0.15px; }
-  .dh-sub { font-size: 12px; color: var(--ink-3); margin-top: 1px; font-weight: 400; }
+  .dh-title { font-weight: 700; font-size: 16px; letter-spacing: -0.15px; }
+  .dh-sub { font-size: 13px; color: var(--ink-3); margin-top: 2px; font-weight: 400; }
 
   .dh-chevron {
     width: 20px; height: 20px; flex-shrink: 0;
@@ -188,7 +188,7 @@
   /* ── ROLES ── */
   .r {
     display: flex; align-items: center; gap: 10px;
-    padding: 6px 8px; margin: 2px 0;
+    padding: 7px 8px; margin: 2px 0;
     border-radius: 8px;
     transition: background var(--transition);
   }
@@ -200,15 +200,15 @@
   .r-i3 { padding-left: 68px; }
 
   .r-pip {
-    width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
     opacity: 0.6;
   }
 
   .r-body { flex: 1; min-width: 0; }
-  .r-title { font-size: 13px; font-weight: 500; color: var(--ink); }
-  .r-name { font-size: 12px; color: var(--ink-3); font-weight: 400; margin-top: 0px; }
+  .r-title { font-size: 14.5px; font-weight: 500; color: var(--ink); }
+  .r-name { font-size: 13.5px; color: var(--ink-3); font-weight: 400; margin-top: 1px; }
   .r-count { font-weight: 400; color: var(--ink-4); }
-  .r-note { font-size: 11px; color: var(--ink-4); font-style: italic; }
+  .r-note { font-size: 12px; color: var(--ink-4); font-style: italic; }
 
   .r-service .r-title { color: var(--ink-4); }
   .r-service .r-pip { opacity: 0.25; }
@@ -217,7 +217,7 @@
   .footer {
     margin-top: 28px; padding: 16px 18px;
     background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-    font-size: 12px; color: var(--ink-3); line-height: 1.8;
+    font-size: 13px; color: var(--ink-3); line-height: 1.8;
   }
   .footer strong { color: var(--ink-2); font-weight: 600; }
 
@@ -442,6 +442,8 @@
         <div class="r r-i1" data-s="tiina mürk tootejuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootejuht</div><div class="r-name">Tiina Mürk</div></div></div>
         <div class="r r-i1" data-s="merit mägi tootejuht"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootejuht</div><div class="r-name">Merit Mägi</div></div></div>
         <div class="r r-i1" data-s="anneli loodus tootearendustehnoloog"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootearendustehnoloog</div><div class="r-name">Anneli Loodus</div></div></div>
+        <div class="r r-i1" data-s="anette russ tootearendustehnoloog"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootearendustehnoloog</div><div class="r-name">Anette Russ</div></div></div>
+        <div class="r r-i1" data-s="biia kiirend tootearendustehnoloog"><div class="r-pip"></div><div class="r-body"><div class="r-title">Tootearendustehnoloog</div><div class="r-name">Biia Kiirend</div></div></div>
       </div></div>
     </div>
 
